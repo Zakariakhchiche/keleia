@@ -13,20 +13,20 @@ const options = ['KeleIA', 'DALL·E'];
 const gptModel = ['gpt-4', 'gpt-4-1106-preview', 'gpt-3.5-turbo'];
 const template = [
   {
-    title: 'Plan a trip',
-    prompt: 'I want to plan a trip to New York City.',
+    title: 'Qui sommes nous?',
+    prompt: 'Qui sommes nous?',
   },
   {
-    title: 'how to make a cake',
-    prompt: 'How to make a cake with chocolate and strawberries?',
+    title: 'Contacts',
+    prompt: 'Contacts?',
   },
   {
-    title: 'Business ideas',
-    prompt: 'Generate 5 business ideas for a new startup company.',
+    title: 'Aide',
+    prompt: 'Comment pouvons nous vous aider?',
   },
   {
-    title: 'What is recursion?',
-    prompt: 'What is recursion? show me an example in python.',
+    title: 'Projet IA',
+    prompt: 'Voici mon projet IA',
   },
 ];
 

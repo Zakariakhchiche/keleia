@@ -2,33 +2,23 @@ import { useState, useEffect, useContext } from 'react';
 import {
   MdClose,
   MdMenu,
-  MdOutlineVpnKey,
   MdDelete,
 } from 'react-icons/md';
 import { ChatContext } from '../context/chatContext';
 import bot from '../assets/logo.svg';
 import ToggleTheme from './ToggleTheme';
-import Modal from './Modal';
-import Setting from './Setting';
 
-/**
- * A sidebar component that displays a list of nav items and a toggle
- * for switching between light and dark modes.
- *
- * @param {Object} props - The properties for the component.
- */
 const SideBar = () => {
   const [open, setOpen] = useState(true);
   const [, , clearChat] = useContext(ChatContext);
-  const [modalOpen, setModalOpen] = useState(false);
-
-  function handleResize() {
-    window.innerWidth <= 720 ? setOpen(false) : setOpen(true);
-  }
 
   useEffect(() => {
     handleResize();
   }, []);
+
+  function handleResize() {
+    window.innerWidth <= 720 ? setOpen(false) : setOpen(true);
+  }
 
   function clear() {
     clearChat();
@@ -54,6 +44,16 @@ const SideBar = () => {
         </div>
       </div>
 
+      <div className={`px-4 text-sm text-center ${!open && 'hidden'}`}>
+        <p className="mb-4 text-red-600 dark:text-red-400 font-medium">
+          Cette application est un outil d'aide à la compréhension religieuse et ne remplace pas l'avis des savants ni leurs jugements.
+        </p>
+        <div className="text-neutral-500 dark:text-neutral-400 italic">
+          <p className="mb-2 font-semibold">Sourate 18 : Al-Kahf (La Caverne), Verset 26</p>
+          <p>"Dis : Allah sait mieux combien de temps ils demeurèrent. À Lui appartient l'inconnaissable des cieux et de la terre. Comme Il voit clair en eux et comme Il entend bien ! Ils n'ont aucun allié en dehors de Lui, et Il n'associe personne à Son commandement."</p>
+        </div>
+      </div>
+
       <ul className='w-full menu rounded-box'>
         <li>
           <a className='border border-slate-500' onClick={clear}>
@@ -67,16 +67,7 @@ const SideBar = () => {
         <li>
           <ToggleTheme open={open} />
         </li>
-        <li>
-          <a onClick={() => setModalOpen(true)}>
-            <MdOutlineVpnKey size={15} />
-            <p className={`${!open && 'hidden'}`}>OpenAI Key</p>
-          </a>
-        </li>
       </ul>
-      <Modal title='Setting' modalOpen={modalOpen} setModalOpen={setModalOpen}>
-        <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      </Modal>
     </section>
   );
 };

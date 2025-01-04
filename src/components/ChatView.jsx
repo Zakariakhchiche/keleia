@@ -12,20 +12,20 @@ import Setting from './Setting';
 const options = ['E-da-IA', 'DALL·E'];
 const template = [
   {
-    title: 'Qui sommes nous?',
-    prompt: 'Qui sommes nous?',
+    title: 'Quelles sont les conditions pour qu\'une prière soit acceptée ?',
+    prompt: 'Quelles sont les conditions essentielles pour qu\'une prière soit valide et acceptée en Islam ?',
   },
   {
-    title: 'Contacts',
-    prompt: 'Contacts?',
+    title: 'Quels sont les actes qui invalident le jeûne ?',
+    prompt: 'Pouvez-vous expliquer en détail les différents actes qui peuvent invalider le jeûne du Ramadan ?',
   },
   {
-    title: 'Aide',
-    prompt: 'Comment pouvons nous vous aider?',
+    title: 'Quelles sont les conditions d\'un mariage islamique valide ?',
+    prompt: 'Quelles sont les conditions requises pour qu\'un mariage soit considéré comme valide selon la loi islamique ?',
   },
   {
-    title: 'Projet IA',
-    prompt: 'Voici mon projet IA',
+    title: 'Quelle est la meilleure manière de lire et mémoriser le Coran ?',
+    prompt: 'Quelles sont les méthodes recommandées pour une lecture efficace et une mémorisation durable du Coran ?',
   },
 ];
 

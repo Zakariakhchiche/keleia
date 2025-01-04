@@ -1,6 +1,6 @@
-# KeleIA-Pro
+# E-da-IA-Pro
 
-KeleIA-Pro is an advanced application that combines the power of KeleIA and DALL.E. With this app, you have the flexibility to switch between KeleIA versions. One of the standout features of KeleIA-Pro is its ability to save chat conversations to local storage.
+E-da-IA-Pro is an advanced application that combines the power of E-da-IA and DALL.E. With this app, you have the flexibility to switch between E-da-IA versions. One of the standout features of E-da-IA-Pro is its ability to save chat conversations to local storage.
 
 ## One-Click Deploy
 

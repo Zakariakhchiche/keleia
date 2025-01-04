@@ -9,8 +9,7 @@ import { dalle } from '../utils/dalle';
 import Modal from './Modal';
 import Setting from './Setting';
 
-const options = ['KeleIA', 'DALL·E'];
-const gptModel = ['gpt-4', 'gpt-4-1106-preview', 'gpt-3.5-turbo'];
+const options = ['E-da-IA', 'DALL·E'];
 const template = [
   {
     title: 'Qui sommes nous?',
@@ -39,7 +38,6 @@ const ChatView = () => {
   const [formValue, setFormValue] = useState('');
   const [thinking, setThinking] = useState(false);
   const [selected, setSelected] = useState(options[0]);
-  const [gpt, setGpt] = useState(gptModel[0]);
   const [messages, addMessage] = useContext(ChatContext);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -87,17 +85,14 @@ const ChatView = () => {
 
     const newMsg = cleanPrompt;
     const aiModel = selected;
-    const gptVersion = gpt;
 
     setThinking(true);
     setFormValue('');
     updateMessage(newMsg, false, aiModel);
-    console.log(gptVersion);
 
-    console.log(selected);
     try {
       if (aiModel === options[0]) {
-        const LLMresponse = await davinci(cleanPrompt, key, gptVersion);
+        const LLMresponse = await davinci(cleanPrompt, key);
         //const data = response.data.choices[0].message.content;
         LLMresponse && updateMessage(LLMresponse, true, aiModel);
       } else {
@@ -135,24 +130,6 @@ const ChatView = () => {
 
   return (
     <main className='relative flex flex-col h-screen p-1 overflow-hidden dark:bg-light-grey'>
-      <div className='mx-auto my-4 tabs tabs-boxed w-fit'>
-        <a
-          onClick={() => setGpt(gptModel[0])}
-          className={`${gpt == gptModel[0] && 'tab-active'} tab`}>
-          GPT-4
-        </a>
-        <a
-          onClick={() => setGpt(gptModel[1])}
-          className={`${gpt == gptModel[1] && 'tab-active'} tab`}>
-          GPT-4-1106-preview
-        </a>
-        <a
-          onClick={() => setGpt(gptModel[2])}
-          className={`${gpt == gptModel[2] && 'tab-active'} tab`}>
-          GPT-3.5
-        </a>
-      </div>
-
       <section className='flex flex-col flex-grow w-full px-4 overflow-y-scroll sm:px-10 md:px-32'>
         {messages.length ? (
           messages.map((message, index) => (

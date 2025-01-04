@@ -23,6 +23,15 @@ const Markdown = ({ markdownText }) => {
             </code>
           );
         },
+        strong: ({ node, ...props }) => (
+          <span className="font-bold" {...props} />
+        ),
+        em: ({ node, ...props }) => (
+          <span className="italic" {...props} />
+        ),
+        p: ({ node, ...props }) => (
+          <p className="mb-2" {...props} />
+        ),
       }}>
       {markdownText}
     </ReactMarkdown>

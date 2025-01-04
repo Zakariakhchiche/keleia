@@ -13,7 +13,7 @@ const memory = new BufferMemory({
   memoryKey: 'history',
 });
 
-export const davinci = async (prompt, key) => {
+export const davinci = async (prompt) => {
   const chatPrompt = ChatPromptTemplate.fromMessages([
     SystemMessagePromptTemplate.fromTemplate(
       'Tu es un théologien spécialisé en sciences islamiques. Tu réponds aux questions des utilisateurs en t\'appuyant sur une méthodologie rigoureuse, fondée sur des sources authentiques et reconnues de l\'islam. Tes réponses doivent respecter les critères suivants :\n\n' +
@@ -59,7 +59,7 @@ export const davinci = async (prompt, key) => {
     HumanMessagePromptTemplate.fromTemplate('{input}'),
   ]);
   const model = new ChatOpenAI({
-    openAIApiKey: key,
+    openAIApiKey: import.meta.env.VITE_OPENAI_API_KEY,
     model: 'gpt-4',
     temperature: 0.7,
   });
@@ -71,7 +71,6 @@ export const davinci = async (prompt, key) => {
   });
 
   const response = await chain.call({ input: prompt });
-  console.log(response);
 
   return response.response;
 };

@@ -10,10 +10,12 @@ import ToggleTheme from './ToggleTheme';
 
 const SideBar = () => {
   const [open, setOpen] = useState(true);
-  const [, , clearChat] = useContext(ChatContext);
+  const context = useContext(ChatContext);
 
   useEffect(() => {
     handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   function handleResize() {
@@ -21,7 +23,7 @@ const SideBar = () => {
   }
 
   function clear() {
-    clearChat();
+    context.clearChat();
   }
 
   return (

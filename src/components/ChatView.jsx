@@ -6,8 +6,6 @@ import { MdSend } from 'react-icons/md';
 import { replaceProfanities } from 'no-profanity';
 import { davinci } from '../utils/davinci';
 import { dalle } from '../utils/dalle';
-import Modal from './Modal';
-import Setting from './Setting';
 
 const options = ['E-da-IA', 'DALL·E'];
 const template = [
@@ -38,8 +36,7 @@ const ChatView = () => {
   const [formValue, setFormValue] = useState('');
   const [thinking, setThinking] = useState(false);
   const [selected, setSelected] = useState(options[0]);
-  const [messages, addMessage] = useContext(ChatContext);
-  const [modalOpen, setModalOpen] = useState(false);
+  const { messages, addMessage } = useContext(ChatContext);
 
   /**
    * Scrolls the chat area to the bottom.
@@ -75,14 +72,7 @@ const ChatView = () => {
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    const key = window.localStorage.getItem('api-key');
-    if (!key) {
-      setModalOpen(true);
-      return;
-    }
-
     const cleanPrompt = replaceProfanities(formValue);
-
     const newMsg = cleanPrompt;
     const aiModel = selected;
 
@@ -92,18 +82,16 @@ const ChatView = () => {
 
     try {
       if (aiModel === options[0]) {
-        const LLMresponse = await davinci(cleanPrompt, key);
-        //const data = response.data.choices[0].message.content;
+        const LLMresponse = await davinci(cleanPrompt);
         LLMresponse && updateMessage(LLMresponse, true, aiModel);
       } else {
-        const response = await dalle(cleanPrompt, key);
-        const data = response.data.data[0].url;
-        data && updateMessage(data, true, aiModel);
+        const response = await dalle(cleanPrompt);
+        response && updateMessage(response, true, aiModel);
       }
     } catch (err) {
-      window.alert(`Error: ${err} please try again later`);
+      console.error(err);
+      window.alert('Error: ' + err.message);
     }
-
     setThinking(false);
   };
 
@@ -180,9 +168,6 @@ const ChatView = () => {
           </button>
         </div>
       </form>
-      <Modal title='Setting' modalOpen={modalOpen} setModalOpen={setModalOpen}>
-        <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      </Modal>
     </main>
   );
 };

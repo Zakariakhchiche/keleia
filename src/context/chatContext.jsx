@@ -6,7 +6,11 @@ import useMessageCollection from '../hooks/useMessageCollection';
  * ChatContext is a context object that is used to share collection of messages
  * between components
  */
-const ChatContext = createContext({});
+const ChatContext = createContext({
+  messages: [],
+  addMessage: () => {},
+  clearChat: () => {}
+});
 
 /**
  * ChatContextProvider is a functional component that serves as a provider for the ChatContext.
@@ -19,7 +23,7 @@ const ChatContextProvider = (props) => {
   const { messages, addMessage, clearChat } = useMessageCollection();
 
   return (
-    <ChatContext.Provider value={[messages, addMessage, clearChat]}>
+    <ChatContext.Provider value={{ messages, addMessage, clearChat }}>
       {props.children}
     </ChatContext.Provider>
   );

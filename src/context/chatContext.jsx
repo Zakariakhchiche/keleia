@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 import useMessageCollection from '../hooks/useMessageCollection';
 
 /**
@@ -9,7 +9,9 @@ import useMessageCollection from '../hooks/useMessageCollection';
 const ChatContext = createContext({
   messages: [],
   addMessage: () => {},
-  clearChat: () => {}
+  clearChat: () => {},
+  open: true,
+  setOpen: () => {}
 });
 
 /**
@@ -21,9 +23,10 @@ const ChatContext = createContext({
  */
 const ChatContextProvider = (props) => {
   const { messages, addMessage, clearChat } = useMessageCollection();
+  const [open, setOpen] = useState(true);
 
   return (
-    <ChatContext.Provider value={{ messages, addMessage, clearChat }}>
+    <ChatContext.Provider value={{ messages, addMessage, clearChat, open, setOpen }}>
       {props.children}
     </ChatContext.Provider>
   );
